@@ -32,7 +32,7 @@ public class View {
                     Список доступных команд:
                     1. customer create {name}
                     2. customer list
-                    3. order create {customerId}
+                    3. order create {number} {customerId}
                     4. order list
                     5. order {customerId}
                     6. exit
@@ -83,9 +83,10 @@ public class View {
                 String customerId = args[0];
                 System.out.println(orderPresenter.getByCustomer(customerId));
             }
-        } else if (args.length == 2 && "create".equals(args[0])) {
-            String customerId = args[1];
-            orderPresenter.create(customerId);
+        } else if (args.length == 3 && "create".equals(args[0])) {
+            String number = args[1];
+            String customerId = args[2];
+            orderPresenter.create(number, customerId);
         } else {
             System.err.println("Неизвестная команда");
         }

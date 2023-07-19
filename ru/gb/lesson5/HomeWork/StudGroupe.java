@@ -1,33 +1,26 @@
-package ru.gb.lesson5;
+package ru.gb.lesson5.HomeWork;
 
 import java.util.Objects;
 import java.util.UUID;
-
-public class Order {
-
-    private static int counter = 1;
+public class StudGroupe {
 
     private final UUID id;
     private final String number;
-    private final Customer customer;
 
-    public Order(String number, Customer customer) {
+    public StudGroupe(String number) {
         this.id = UUID.randomUUID();
         this.number = number;
-                // this.number = "#" + counter++;
-        this.customer = customer;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public UUID getId() {
+        return id;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return id.equals(order.id);
+        StudGroupe studGroupe = (StudGroupe) o;
+        return id.equals(studGroupe.id);
     }
 
     @Override
@@ -37,6 +30,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "[" + id + "] (" + number + ") Owner = {" + customer + "}";
+        return "[" + id + "] " + number;
     }
+
 }

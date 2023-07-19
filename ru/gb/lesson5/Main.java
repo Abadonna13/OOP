@@ -24,7 +24,7 @@ public class Main {
 
         // Для удобства
         customerModel.create("TestCustomer");
-        orderModel.create(customerModel.getAll().get(0));
+        orderModel.create("11111",customerModel.getAll().get(0));
 
         View view = new View();
 

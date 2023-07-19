@@ -1,4 +1,4 @@
-package ru.gb.lesson5;
+package ru.gb.lesson5.HomeWork;
 
 public class Homework {
 
@@ -18,5 +18,8 @@ public class Homework {
      *
      * lesson <-> studentGroup <- student
      */
+    public static void main(String[] args) {
+
+    }
 
 }

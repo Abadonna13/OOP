@@ -9,8 +9,8 @@ public class OrderModel {
 
     private List<Order> storage = new ArrayList<>();
 
-    public void create(Customer customer) {
-        storage.add(new Order(customer));
+    public void create(String number, Customer customer) {
+        storage.add(new Order(number, customer));
     }
 
     public List<Order> getAll() {

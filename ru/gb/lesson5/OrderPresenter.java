@@ -13,10 +13,10 @@ public class OrderPresenter {
         this.orderModel = orderModel;
     }
 
-    public void create(String customerId) {
+    public void create(String number, String customerId) {
         Customer customer = customerModel.getById(UUID.fromString(customerId));
         if (customer != null) {
-            orderModel.create(customer);
+            orderModel.create(number, customer);
         }
     }
 
