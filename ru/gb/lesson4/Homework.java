@@ -39,10 +39,10 @@ public class Homework {
 //        appleBox.moveTo(goldenAppleBox); // не должно компилироваться
 //        orangeBox.moveTo(appleBox);      // не должно компилироваться
 //
-//        Box<Orange> orangeBox2 = new Box<>();
-//        orangeBox.moveTo(orangeBox2);
-//        System.out.println(orangeBox.getWeight()); // 0
-//        System.out.println(orangeBox2.getWeight()); // 3
+        Box<Orange> orangeBox2 = new Box<>();
+        orangeBox.moveTo(orangeBox2);
+        System.out.println(orangeBox.getWeight()); // 0
+        System.out.println(orangeBox2.getWeight()); // 3
     }
 
     // FIXME: 06.07.2023 Добавить нужный дженерик.
@@ -50,7 +50,7 @@ public class Homework {
         private List<T> delegate = new ArrayList<>();
 
             public void add(T fruit) {
-            delegate.add(fruit );
+            delegate.add(fruit);
         }
         // FIXME: 06.07.2023 Реализовать методы согласно заданию.
 
@@ -58,6 +58,17 @@ public class Homework {
 //        public List<T> getDelegate() {
 //            return delegate;
 //        }
+        public void moveTo(Box<T> box){
+            for (T fruit : delegate) {
+
+                box.add(fruit);
+            }
+            delegate.removeAll(getAllNumbers());
+
+        }
+        public List<T> getAllNumbers() {
+            return delegate;
+        }
 
         public Integer getWeight(){
                 Integer weight = 0;
