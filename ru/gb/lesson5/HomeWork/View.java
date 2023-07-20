@@ -1,4 +1,4 @@
-package ru.gb.lesson5;
+package ru.gb.lesson5.HomeWork;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,8 +9,8 @@ public class View {
     // view <-> presenter
     // view -> presenter -> view
 
-    private CustomerPresenter customerPresenter;
-    private OrderPresenter orderPresenter;
+    private StudGroupePresenter studGroupePresenter;
+    private StudentPresenter studentPresenter;
 
     private final Scanner scanner;
 
@@ -18,23 +18,23 @@ public class View {
         this.scanner = new Scanner(System.in);
     }
 
-    public void setCustomerPresenter(CustomerPresenter customerPresenter) {
-        this.customerPresenter = customerPresenter;
+    public void setStudGroupePresenter(StudGroupePresenter studGroupePresenter) {
+        this.studGroupePresenter = studGroupePresenter;
     }
 
-    public void setOrderPresenter(OrderPresenter orderPresenter) {
-        this.orderPresenter = orderPresenter;
+    public void setStudentPresenter(StudentPresenter studentPresenter) {
+        this.studentPresenter = studentPresenter;
     }
 
     public void start() {
         while (true) {
             System.out.println("""
                     Список доступных команд:
-                    1. customer create {name}
-                    2. customer list
-                    3. order create {number} {customerId}
-                    4. order list
-                    5. order {customerId}
+                    1. group create {number}
+                    2. group list
+                    3. student create {F I O} {groupId}
+                    4. student list
+                    5. student {groupId}
                     6. exit
                     """);
             String command = scanner.nextLine();
@@ -47,26 +47,26 @@ public class View {
             String commandName = commandArray[0];
             String[] args = Arrays.copyOfRange(commandArray, 1, commandArray.length);
 
-            if ("customer".equals(commandName)) {
-                handleCustomerCommand(args);
-            } else if ("order".equals(commandName)) {
-                handleOrderCommand(args);
+            if ("group".equals(commandName)) {
+                handleGroupCommand(args);
+            } else if ("student".equals(commandName)) {
+                handleStudentCommand(args);
             } else {
-                // ошибка
+                System.err.println("Неизвестная команда");  // ошибка
             }
         }
     }
 
-    public void printAllCustomers(List<Customer> customers) {
-        System.out.println(customers);
+    public void printAllGroupe(List<StudGroupe> studGroupes) {
+        System.out.println(studGroupes);
     }
 
-    private void handleCustomerCommand(String[] args) {
+    private void handleGroupCommand(String[] args) {
         if (args.length == 2) {
-            String customerName = args[1];
-            customerPresenter.create(customerName);
+            String groupNumber = args[1];
+            studGroupePresenter.create(groupNumber);
         } else if (args.length == 1 && "list".equals(args[0])) {
-            customerPresenter.getAll();
+            studGroupePresenter.getAll();
 
 //            List<Customer> customers = customerPresenter.getAll();
 //            System.out.println(customers);
@@ -75,18 +75,18 @@ public class View {
         }
     }
 
-    private void handleOrderCommand(String[] args) {
+    private void handleStudentCommand(String[] args) {
         if (args.length == 1) {
             if ("list".equals(args[0])) {
-                System.out.println(orderPresenter.getAll());
+                System.out.println(studentPresenter.getAll());
             } else {
-                String customerId = args[0];
-                System.out.println(orderPresenter.getByCustomer(customerId));
+                String studeGroupeId = args[0];
+                System.out.println(studentPresenter.getByStudGroupe(studeGroupeId));
             }
-        } else if (args.length == 3 && "create".equals(args[0])) {
-            String number = args[1];
-            String customerId = args[2];
-            orderPresenter.create(number, customerId);
+        } else if (args.length == 5 && "create".equals(args[0])) {
+            String name = args[1] + " " + args[2] + " " + args[3];
+            String studGroupId = args[4];
+            studentPresenter.create(name, studGroupId);
         } else {
             System.err.println("Неизвестная команда");
         }

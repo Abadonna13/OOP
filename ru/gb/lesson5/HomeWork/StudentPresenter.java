@@ -13,23 +13,23 @@ public class StudentPresenter {
         this.studentModel = studentModel;
     }
 
-    public void create(String name, String studGroupeId) {
-        StudGroupe studGroupe = studGroupeModel.getById(UUID.fromString(studGroupeId));
+    public void create(String name, String studGroupId) {
+        StudGroupe studGroupe = studGroupeModel.getById(UUID.fromString(studGroupId));
         if (studGroupe != null) {
             studentModel.create(name,studGroupe);
         }
     }
 
-//    public List<Order> getAll() {
-//        return orderModel.getAll();
-//    }
-//
-//    public List<Order> getByCustomer(String customerId) {
-//        Customer customer = customerModel.getById(UUID.fromString(customerId));
-//        if (customer != null) {
-//            return orderModel.getByCustomer(customer);
-//        }
-//        return List.of();
-//    }
+    public List<Student> getAll() {
+        return studentModel.getAll();
+    }
+
+    public List<Student> getByStudGroupe(String studeGroupId) {
+        StudGroupe studGroupe = studGroupeModel.getById(UUID.fromString(studeGroupId));
+        if (studGroupe != null) {
+            return studentModel.getByGroupe(studGroupe);
+        }
+        return List.of();
+    }
 
 }

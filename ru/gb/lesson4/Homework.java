@@ -1,6 +1,7 @@
 package ru.gb.lesson4;
 
-import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Homework {
 
@@ -10,30 +11,30 @@ public class Homework {
      *
      * Нужно создать класс "Коробка с фруктами", в которую можно класть фрукты какого-то типа.
      * После создания коробка пустая. В нее можно добавлять фрукты с помощью метода add.
-     * У коробки можно узнать сумарный вес с помощью метода #getWeight.
+     * У коробки можно узнать суммарный вес с помощью метода #getWeight.
      * Содержимое коробки можно пересыпать в другую коробку. При этом исходная коробка очищается, а вторая наполняется.
      */
     public static void main(String[] args) {
 //        Box<String> stringBox = new Box<>(); // не должно компилироваться
-//
-//        Box<Orange> orangeBox = new Box<>();
-//        orangeBox.add(new Orange(1));
-//        orangeBox.add(new Orange(2));
+
+        Box<Orange> orangeBox = new Box<>();
+        orangeBox.add(new Orange(1));
+        orangeBox.add(new Orange(2));
 //        orangeBox.add(new Apple(2));       // не должно компилироваться
 //        orangeBox.add(new GoldenApple(2)); // не должно компилироваться
-//
-//        System.out.println(orangeBox.getWeight()); // 3
-//
-//        Box<Apple> appleBox = new Box<>();
-//        appleBox.add(new Apple(1));
-//        appleBox.add(new GoldenApple(2)); // допустимый вариант
-//        System.out.println(appleBox.getWeight()); // 3
-//
-//        Box<GoldenApple> goldenAppleBox = new Box<>();
-//        goldenAppleBox.add(new GoldenApple(5)); // допустимый вариант
+
+        System.out.println(orangeBox.getWeight()); // 3
+
+        Box<Apple> appleBox = new Box<>();
+        appleBox.add(new Apple(1));
+        appleBox.add(new GoldenApple(2)); // допустимый вариант
+        System.out.println(appleBox.getWeight()); // 3
+
+        Box<GoldenApple> goldenAppleBox = new Box<>();
+        goldenAppleBox.add(new GoldenApple(5)); // допустимый вариант
 //        goldenAppleBox.add(new Apple(5));       // не должно компилироваться
-//        System.out.println(goldenAppleBox.getWeight()); // 5
-//
+        System.out.println(goldenAppleBox.getWeight()); // 5
+
 //        goldenAppleBox.moveTo(appleBox); // допустимый вариант
 //        appleBox.moveTo(goldenAppleBox); // не должно компилироваться
 //        orangeBox.moveTo(appleBox);      // не должно компилироваться
@@ -45,10 +46,27 @@ public class Homework {
     }
 
     // FIXME: 06.07.2023 Добавить нужный дженерик.
-    static class Box {
+    static class Box <T extends Fruit> {
+        private List<T> delegate = new ArrayList<>();
 
+            public void add(T fruit) {
+            delegate.add(fruit );
+        }
         // FIXME: 06.07.2023 Реализовать методы согласно заданию.
 
+
+//        public List<T> getDelegate() {
+//            return delegate;
+//        }
+
+        public Integer getWeight(){
+                Integer weight = 0;
+            for (T fruit : delegate) {
+                weight += fruit.getWeight();
+            }
+            return weight;
+
+        }
     }
 
     static class Fruit {
